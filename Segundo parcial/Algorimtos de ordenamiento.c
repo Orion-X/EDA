@@ -33,7 +33,7 @@ float num(int num);
 
 int main(){
 	int a[8], num, i, x, y;
-/*
+
 	for (i = 0; i < 8; i++){
 		printf("Dame un numero: ");
 		scanf("%d",&a[i]);
@@ -41,7 +41,7 @@ int main(){
 	printf("Arreglo desordenado\n");
 	for (i = 0; i < 8; i++){
 		printf("%d", a[i]);
-	}*/
+	}
 	printf("\n");
 	//ordBurbuja(a);
 	//ordSeleccioanr(a);
@@ -380,45 +380,92 @@ float num(int num){
 	} while (num>10);
 	return num;
 }
+/* 25 56 49 1 15 35 26 22 */
 
 void ordBucketsort(int a[]){
- int i, j, k, tmp, aux;
- int copia[8][8], b[8];
+ int i, j, aux, tmp = 0;
+ int copia[8][8], b[8], c[8];
 
-	/* Inicializar la matriz en -1's */
+	/* Inicializar la matriz en 0's */
  for (i = 0; i < 8; i++){
  	for (j = 0; j < 8; j++){
  		copia[i][j] = 0;
  	}
  }
-
+	/*Guarda el primer digito del numero*/
  for (i = 0; i < 8; i++){
  	b[i] = num(a[i]);
  }
+ /*
+ for (i = 0; i < 8; i++){
+ 	printf("%d ", b[i]);
+ }*/
+
 
  for (i = 0; i < 8; i++){
  	j=0;
  	while(copia[b[i]][j]!=0){
  		j++;
- 		copia[b[i]][j]= a[i];
  	}
+ 		copia[b[i]][j]= a[i];
  }
 
- 	for (i = 0; i < 7; i++){
- 		for (j = 0; j < 8; j++){
- 			if (copia[i][j] > copia[i+1][j]){
+ printf("\n\n matriz desordenada");
+ for (i = 0; i < 8; i++){
+ 	printf("\n\n");
+ 	printf("[%d]:", i);
+ 	for (j = 0; j < 8; j++){
+ 		//if (copia[i][j] != 0){
+ 			printf("%d ", copia[i][j]);
+ 		//}
+ 	}
+ }
+ 	/*Ordena los elementos de la matriz por renglon*/
+ 	for (i = 2; i < 3; i++){
+ 		for (j = 0; j < 7; j++){
+ 			if (copia[i][j] > copia[i][j+1] && /*copia[i][j] != 0 &&*/copia[i][j+1] != 0){
+ 			//printf("\ni: %d i+1: %d\n", copia[i][j], copia[i][j+1]);
  				aux = copia[i][j];
- 				copia[i][j] = copia[i+1][j];
- 				copia[i+1][j] = aux;
+ 				copia[i][j] = copia[i][j+1];
+ 				copia[i][j+1] = aux;
+ 				i--;
+ 				j=0;
  			}
 		}
 	}
 
- /*for (i = 0; i < 8; i++){
+ printf("\n\n matriz ordenada");
+ for (i = 0; i < 8; i++){
  	printf("\n\n");
+ 	printf("[%d]:", i);
  	for (j = 0; j < 8; j++){
- 		printf("%d ", b[i][j]);
+ 		//if (copia[i][j] != 0){
+ 			printf("%d ", copia[i][j]);
+ 		//}
  	}
+ }
+
+
+for (i = 0; i < 8; i++){
+ 	for (j = 0; j < 8; j++){
+ 		if (copia[i][j] != 0){
+ 			c[tmp++] = copia[i][j];
+ 		}
+ 	}
+ }
+/*
+ for (i = 0; i < 8; i++){
+ 	j=0;
+ 	while(copia[i][j]!=0){
+ 		b[i] = copia[i][j];
+ 		j++;
+ 	}
+
  }*/
+
+  printf("\n\n arreglo ordenada: ");
+  for (i = 0; i < 8; i++){
+ 	printf("%d ", c[i]);
+ }
 
 }
